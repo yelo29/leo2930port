@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Web Dev: Beginner Technical Documentation</title>
+  <link rel="stylesheet" href="1techdolpz.css">
+
+  <!-- Dark-mode overrides & toggle styles -->
+  <style>
+    /* Smooth transitions for color changes */
+    :root {
+      --transition-fast: 200ms ease;
+    }
+    body, #navbar, .main-section, pre, code, a.nav-link {
+      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    /* Toggle button basic styling */
+    #theme-toggle {
+      appearance: none;
+      -webkit-appearance: none;
+      border: none;
+      background: transparent;
+      padding: 6px;
+      margin-left: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      cursor: pointer;
+      color: inherit;
+      line-height: 0;
+    }
+    #theme-toggle:focus {
+      outline: 2px solid #9fd4ff;
+      outline-offset: 2px;
+    }
+    /* Small icon sizing */
+    #theme-toggle svg { width: 18px; height: 18px; display: block; }
+
+    /* Light-mode (default) hint for toggle */
+    .theme-icon--sun { display: inline-block; }
+    .theme-icon--moon { display: none; }
+
+    /* DARK MODE - class applied to <body> */
+    body.dark-mode {
+      background: #071021; /* dark page bg */
+      color: #e6eef8; /* light text */
+    }
+
+    body.dark-mode #navbar {
+      background: linear-gradient(180deg, #071424, #04101a);
+      border-right-color: rgba(255,255,255,0.03);
+      box-shadow: 2px 0 18px rgba(0,0,0,0.6);
+      color: #e6eef8;
+    }
+
+    body.dark-mode #navbar header { color: #eaf6ff; }
+
+    body.dark-mode a.nav-link {
+      color: #9fd4ff;
+    }
+    body.dark-mode a.nav-link:hover,
+    body.dark-mode a.nav-link:focus {
+      background: rgba(159,208,255,0.06);
+    }
+
+    body.dark-mode .main-section {
+      background: linear-gradient(180deg, #071428, #041018);
+      border-color: rgba(255,255,255,0.03);
+      box-shadow: 0 10px 30px rgba(2,6,12,0.6);
+      color: #e6eef8;
+    }
+
+    body.dark-mode pre {
+      background: #02121b;
+      color: #dff1ff;
+    }
+
+    body.dark-mode code {
+      background: rgba(255,255,255,0.03);
+      color: #e6eef8;
+    }
+
+    /* Toggle icon states when in dark mode */
+    body.dark-mode .theme-icon--sun { display: none; }
+    body.dark-mode .theme-icon--moon { display: inline-block; }
+
+    /* Compact placement of button inside header */
+    #navbar header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    /* Make header text remain as simple text but still the only header element */
+    #navbar header .nav-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    /* On small screens keep toggle visible and compact */
+    @media (max-width: 800px) {
+      #theme-toggle { margin-left: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fixed left navigation -->
+  <nav id="navbar" aria-label="Main navigation">
+    <!-- header element required by tests: kept as the single header inside #navbar -->
+    <header>
+      <span class="nav-title">Web Dev Docs</span>
+
+      <!-- Dark mode toggle lives inside the same header (still counts as one header element) -->
+      <button id="theme-toggle"
+              aria-pressed="false"
+              aria-label="Toggle dark mode"
+              title="Toggle dark mode">
+        <!-- Sun icon (light mode) -->
+        <svg class="theme-icon--sun" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.79 1.8-1.79zM1 13h3v-2H1v2zm10-9h2V1h-2v3zm7.03 2.05l1.79-1.79-1.79-1.79-1.8 1.79 1.8 1.79zM17 13h3v-2h-3v2zM12 6a6 6 0 100 12 6 6 0 000-12zm0 2a4 4 0 110 8 4 4 0 010-8zM6.76 19.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79zM19.84 17.66l1.79 1.79 1.79-1.79-1.79-1.79-1.79 1.79zM12 23h2v-3h-2v3z"/>
+        </svg>
+
+        <!-- Moon icon (dark mode) -->
+        <svg class="theme-icon--moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </button>
+    </header>
+
+    <ul>
+      <li><a class="nav-link" href="#Introduction_to_HTML">Introduction to HTML</a></li>
+      <li><a class="nav-link" href="#CSS_Basics">CSS Basics</a></li>
+      <li><a class="nav-link" href="#JavaScript_and_DOM">JavaScript and DOM</a></li>
+      <li><a class="nav-link" href="#Responsive_Design">Responsive Design</a></li>
+      <li><a class="nav-link" href="#Web_Accessibility">Web Accessibility</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main documentation content -->
+  <main id="main-doc">
+    <section class="main-section" id="Introduction_to_HTML">
+      <header>
+        Introduction to HTML
+      </header>
+
+      <p>
+        HTML (HyperText Markup Language) is the standard language for creating web pages.
+        It provides the structure of a page using elements such as headings, paragraphs, lists, links, and images.
+      </p>
+
+      <p>
+        A basic HTML element looks like: <code>&lt;p&gt;Your text here&lt;/p&gt;</code>.
+        The <code>doctype</code> declaration at the top tells the browser which HTML version to expect.
+      </p>
+
+      <ul>
+        <li>Elements: &lt;h1&gt; - &lt;h6&gt;, &lt;p&gt;, &lt;a&gt;, &lt;img&gt;</li>
+        <li>Attributes: provide extra information, e.g. <code>src</code> and <code>alt</code> for images</li>
+      </ul>
+
+      <p>
+        Example block:
+      </p>
+      <pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Hello world!&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    </section>
+
+    <section class="main-section" id="CSS_Basics">
+      <header>
+        CSS Basics
+      </header>
+
+      <p>
+        CSS (Cascading Style Sheets) controls the presentation of HTML. Rules (selectors + declarations) define how elements appear.
+      </p>
+
+      <p>
+        Example of a CSS rule: <code>p { color: #333; line-height: 1.6; }</code>. Classes and IDs allow targeted styling.
+      </p>
+
+      <ul>
+        <li>Selectors: element, class <code>.example</code>, id <code>#example</code></li>
+        <li>Box model: margin, border, padding, content</li>
+        <li>Specificity: determines which rule wins when multiple rules apply</li>
+      </ul>
+
+      <p>
+        Use an external stylesheet by linking with: <code>&lt;link rel="stylesheet" href="styles.css"&gt;</code>.
+      </p>
+    </section>
+
+    <section class="main-section" id="JavaScript_and_DOM">
+      <header>
+        JavaScript and DOM
+      </header>
+
+      <p>
+        JavaScript adds interactivity. Script code runs in the browser and can manipulate the DOM (Document Object Model).
+      </p>
+
+      <p>
+        Example: selecting an element and changing its text:
+        <code>document.querySelector('h1').textContent = 'Updated';</code>
+      </p>
+
+      <p>
+        The DOM represents HTML elements as objects. You can create, remove, or update elements dynamically.
+      </p>
+
+      <ul>
+        <li>Event listeners: <code>element.addEventListener('click', callback)</code></li>
+        <li>Creating elements: <code>document.createElement('div')</code></li>
+      </ul>
+
+      <pre><code>// Simple click handler
+const btn = document.getElementById('myBtn');
+btn.addEventListener('click', () =&gt; {
+  alert('Button clicked!');
+});
+</code></pre>
+    </section>
+
+    <section class="main-section" id="Responsive_Design">
+      <header>
+        Responsive Design
+      </header>
+
+      <p>
+        Responsive design ensures web pages look and function well on a variety of devices and screen sizes.
+      </p>
+
+      <p>
+        Use flexible grids, fluid images, and media queries. Example: <code>@media (max-width: 800px) { ... }</code>.
+      </p>
+
+      <ul>
+        <li>Fluid grids: use relative units like %, rem, or em</li>
+        <li>Flexible images: <code>img { max-width: 100%; height: auto; }</code></li>
+      </ul>
+
+      <pre><code>/* Example media query */
+@media (max-width: 600px) {
+  .sidebar { display: none; }
+  .content { margin-left: 0; }
+}
+</code></pre>
+
+      <p>
+        Progressive enhancement and mobile-first CSS help keep interfaces simple and performant.
+      </p>
+    </section>
+
+    <section class="main-section" id="Web_Accessibility">
+      <header>
+        Web Accessibility
+      </header>
+
+      <p>
+        Accessibility (a11y) makes content usable by people with disabilities. Follow semantic HTML, use ARIA where necessary, and ensure keyboard navigation.
+      </p>
+
+      <p>
+        Provide descriptive <code>alt</code> text for images, label form fields, and ensure sufficient color contrast.
+      </p>
+
+      <ul>
+        <li>Keyboard focus order and visible focus styles</li>
+        <li>Semantic elements: &lt;nav&gt;, &lt;main&gt;, &lt;header&gt;, &lt;footer&gt;</li>
+      </ul>
+
+      <p>
+        Example: use <code>&lt;nav aria-label="Primary"&gt;</code> to help screen readers find navigation.
+      </p>
+
+      <pre><code>&lt;button aria-pressed="false"&gt;Toggle&lt;/button&gt;
+</code></pre>
+    </section>
+  </main>
+
+  <!-- Theme toggle script -->
+  <script>
+    (function () {
+      const STORAGE_KEY = 'site-theme'; // 'dark' or 'light'
+      const body = document.body;
+      const toggleBtn = document.getElementById('theme-toggle');
+
+      // Apply theme: 'dark' or 'light'
+      function applyTheme(theme, persist = true) {
+        const isDark = theme === 'dark';
+        body.classList.toggle('dark-mode', isDark);
+        toggleBtn.setAttribute('aria-pressed', String(isDark));
+        if (persist) localStorage.setItem(STORAGE_KEY, theme);
+      }
+
+      // Determine initial theme: stored preference -> system preference -> light
+      function initTheme() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored === 'dark' || stored === 'light') {
+          applyTheme(stored, false);
+          return;
+        }
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDark ? 'dark' : 'light', false);
+      }
+
+      // Toggle handler
+      function toggleTheme() {
+        const current = body.classList.contains('dark-mode') ? 'dark' : 'light';
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+      }
+
+      // init
+      initTheme();
+
+      // click & keyboard activation
+      toggleBtn.addEventListener('click', toggleTheme);
+      toggleBtn.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleTheme();
+        }
+      });
+
+      // Keep in sync if user changes OS theme
+      if (window.matchMedia) {
+        const mq = window.matchMedia('(prefers-color-scheme: dark)');
+        mq.addEventListener && mq.addEventListener('change', (e) => {
+          // Only respect system changes if user hasn't explicitly set a preference
+          if (!localStorage.getItem(STORAGE_KEY)) {
+            applyTheme(e.matches ? 'dark' : 'light', false);
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

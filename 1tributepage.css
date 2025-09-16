@@ -1,0 +1,95 @@
+/* Basic reset & typography */
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, #f7f9fb, #ffffff);
+  color: #222;
+  line-height: 1.5;
+}
+
+/* Main container */
+#main {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(20, 30, 50, 0.08);
+  background: #fff;
+}
+
+/* Title */
+#title {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+.subtitle {
+  text-align: center;
+  margin-top: 0.25rem;
+  color: #5b6b7a;
+}
+
+/* Image block */
+#img-div {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: linear-gradient(90deg, rgba(17,119,102,0.03), rgba(255,156,0,0.02));
+  border-radius: 8px;
+  text-align: center; /* helps center figcaption text */
+}
+
+/* Important: image styling required by tests */
+#image {
+  display: block;       /* test: img display block */
+  max-width: 100%;      /* test: max-width 100% */
+  height: auto;         /* test: height auto */
+  margin-left: auto;    /* center image within parent */
+  margin-right: auto;   /* center image within parent */
+  border-radius: 6px;
+  box-shadow: 0 6px 14px rgba(20,30,50,0.08);
+}
+
+/* Caption */
+#img-caption {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: #475b6a;
+}
+
+/* Tribute info */
+#tribute-info {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+#tribute-info h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+/* Link style */
+#tribute-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  background: rgba(17,119,102,0.08);
+  color: #117766;
+  border: 1px solid rgba(17,119,102,0.12);
+}
+#tribute-link:hover,
+#tribute-link:focus {
+  background: rgba(17,119,102,0.12);
+  transform: translateY(-1px);
+}
+
+/* Footer */
+.credits {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #95a1ad;
+  font-size: 0.85rem;
+}
