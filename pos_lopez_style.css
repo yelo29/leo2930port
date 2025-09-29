@@ -1,0 +1,122 @@
+/* GENERAL */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(120deg, lightblue, violet);
+  color: #333;
+}
+
+/* HEADER */
+header {
+  background: rgba(255,255,255,0.9);
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+header h1 {
+  margin: 0;
+}
+.subtitle {
+  font-size: 14px;
+  color: #555;
+}
+
+/* MAIN LAYOUT */
+.pos-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap; /* stack on smaller screens */
+}
+
+/* PRODUCTS SECTION */
+#products {
+  flex: 3; /* takes more space */
+  margin: 10px 0;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.product {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease;
+}
+.product:hover {
+  transform: translateY(-5px);
+}
+
+.product img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.product h3 {
+  margin: 5px 0;
+  font-size: 18px;
+}
+
+.product p {
+  margin: 3px 0;
+  font-size: 14px;
+}
+
+.product button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  background: violet;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.product button:hover {
+  background: darkviolet;
+}
+
+/* SIDEBAR (Cart + Inventory) */
+#cart, #inventory {
+  flex: 1; /* takes less space */
+  margin: 10px 0;
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#cart ul, #inventory ul {
+  list-style: none;
+  padding: 0;
+}
+#cart ul li, #inventory ul li {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: rgba(255,255,255,0.9);
+  margin-top: 20px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+  .pos-container {
+    flex-direction: column; /* stack vertically */
+  }
+  #products, #cart, #inventory {
+    flex: 1 1 100%; /* full width */
+  }
+}
