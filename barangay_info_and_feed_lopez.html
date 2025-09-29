@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barangay Info & Feedback</title>
+  <link rel="stylesheet" href="barangay_iaf_lopez_style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>🏘️ Barangay Info & Feedback</h1>
+    <p class="subtitle">Accessible information and feedback for residents</p>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="main-container">
+
+    <!-- INFO SECTION -->
+    <section class="info">
+      <h2>ℹ️ Barangay Information</h2>
+      <p><strong>Barangay:</strong> Tatala</p>
+      <p><strong>Location:</strong> Binangonan, Rizal</p>
+      <p><strong>Contact:</strong> (02) 123-4567</p>
+      <p><strong>Office Hours:</strong> Mon–Fri, 8:00 AM – 5:00 PM</p>
+    </section>
+
+    <!-- FEEDBACK FORM -->
+    <section class="feedback">
+      <h2>💬 Feedback Form</h2>
+      <form id="feedbackForm">
+        <label for="name">Name (optional):</label>
+        <input type="text" id="name" placeholder="Enter your name">
+
+        <label for="message">Message:</label>
+        <textarea id="message" placeholder="Write your feedback..." required></textarea>
+
+        <button type="submit">Submit Feedback</button>
+      </form>
+
+      <!-- Feedback List -->
+      <div class="feedback-list">
+        <h3>📋 Previous Feedback</h3>
+        <ul id="feedbackEntries"></ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Barangay Tatala | Created by I.T. Student</p>
+  </footer>
+
+  <script src="barangay_iaf_lopez_script.js"></script>
+</body>
+</html>
