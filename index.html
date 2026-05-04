@@ -40,25 +40,45 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 80px;
+      height: 70px;
       background: linear-gradient(90deg, var(--accent-violet), var(--accent-orange));
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      padding: 0 24px;
+      justify-content: space-between;
+      padding: 0 20px;
       z-index: 50;
       box-shadow: 0 6px 18px rgba(0,0,0,0.35);
     }
+    .nav__logo {
+      color: white;
+      font-weight: 800;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
     .nav__bar ul{ display:flex; gap:16px; list-style:none; height:100%; align-items:center; }
-    .nav__bar a{ color: white; text-decoration: none; font-weight:700; padding:14px; display:inline-block; border-radius:8px; transition:transform .18s ease; }
+    .nav__bar a{ color: white; text-decoration: none; font-weight:700; padding:12px 16px; display:inline-block; border-radius:8px; transition:transform .18s ease; font-size: 15px; }
     .nav__bar a:hover{ transform: translateY(-3px); background: rgba(255,255,255,0.06); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 10px;
+    }
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      margin: 3px 0;
+      transition: 0.3s;
+      border-radius: 3px;
+    }
 
     /* MAIN WRAPPER */
     .main-container{
       display:flex;
       flex: 1 1 auto;
-      margin-top: 80px;
-      min-height: calc(100vh - 80px);
+      margin-top: 70px;
+      min-height: calc(100vh - 70px);
       width: 100%;
     }
 
@@ -112,7 +132,7 @@
       border-bottom: 2px solid rgba(255,255,255,0.04);
     }
 
-    /* Lists with emoji/badges */
+    /* Lists with text labels */
     .skills-list,
     .tools-list,
     .certifications-list{
@@ -136,9 +156,7 @@
       padding-bottom: 6px;
     }
 
-    .skills-list li::before{ content: "⚡"; position: absolute; left: 6px; top: 6px; }
-    .tools-list li::before{ content: "🛠️"; position: absolute; left: 6px; top: 6px; }
-    .certifications-list li::before{ content: "📜"; position: absolute; left: 6px; top: 6px; }
+    
 
     .skills-list li a,
     .tools-list li a,
@@ -268,6 +286,98 @@
       .projects__div{ grid-template-columns: 1fr; }
       .project-tile{ width: 100%; }
     }
+    
+    /* Mobile navigation */
+    @media (max-width: 768px){
+      .hamburger { display: flex; }
+      .nav__bar ul {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: linear-gradient(90deg, var(--accent-violet), var(--accent-orange));
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+        padding: 20px 0;
+        gap: 0;
+      }
+      .nav__bar ul.active {
+        left: 0;
+      }
+      .nav__bar ul li {
+        margin: 0;
+        width: 100%;
+      }
+      .nav__bar ul li a {
+        display: block;
+        padding: 15px;
+        border-radius: 0;
+        font-size: 16px;
+      }
+      .nav__bar ul li a:hover {
+        background: rgba(255,255,255,0.1);
+        transform: none;
+      }
+      
+      /* Better mobile touch targets */
+      .project-tile {
+        max-width: 100%;
+        padding: 15px;
+      }
+      
+      .contact__links a {
+        padding: 12px 18px;
+        font-size: 14px;
+      }
+      
+      /* Mobile carousel improvements */
+      .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        padding: 10px;
+      }
+      
+      .project-carousel-wrapper {
+        height: 180px;
+      }
+    }
+    
+    /* Extra small screens */
+    @media (max-width: 480px){
+      .nav__bar {
+        height: 60px;
+        padding: 0 15px;
+      }
+      .main-container {
+        margin-top: 60px;
+        min-height: calc(100vh - 60px);
+      }
+      .nav__bar ul {
+        top: 60px;
+      }
+      .profile {
+        padding: 20px 15px;
+      }
+      .content {
+        padding: 15px;
+      }
+      .project-tile {
+        padding: 12px;
+      }
+      .carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+        padding: 8px;
+      }
+      
+      .project-carousel-wrapper {
+        height: 160px;
+      }
+    }
 
     /* Carousel wrapper */
     .project-carousel-wrapper {
@@ -276,6 +386,7 @@
       max-width: 280px;
       overflow: hidden;
       border-radius: 8px;
+      height: 200px;
     }
 
     /* Horizontal scroll area */
@@ -283,11 +394,13 @@
       display: flex;
       transition: transform 0.5s ease;
       width: 100%;
+      height: 100%;
     }
 
     .project-carousel img {
       flex: 0 0 100%;
-      aspect-ratio: 16/9;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       border-radius: 8px;
     }
@@ -399,7 +512,13 @@
 <body>
   <!-- NAV -->
   <header class="nav__bar">
-    <ul>
+    <a href="#welcome-section" class="nav__logo">JLL Portfolio</a>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul id="nav-menu">
       <li><a href="#welcome-section">About</a></li>
       <li><a href="#personal-projects">Work</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -455,19 +574,19 @@
       <ul class="certifications-list">
         <li>
           <a href="https://www.freecodecamp.org/certification/leo052904/responsive-web-design" target="_blank" rel="noopener">
-            📜 FreeCodeCamp Responsive Web Design
+             FreeCodeCamp Responsive Web Design
           </a>
         </li>
       </ul>
 
       <h3 class="profile-subheading">Tech Stack</h3>
       <ul class="techstack-list" aria-label="Tech stack">
-        <li>💻 HTML5</li>
-        <li>🎨 CSS3</li>
-        <li>⚡ JavaScript</li>
-        <li>⚛️ React.js</li>
-        <li>🗃️ Git</li>
-        <li>🖥️ VS Code</li>
+        <li>HTML5</li>
+        <li>CSS3</li>
+        <li>JavaScript</li>
+        <li>React.js</li>
+        <li>Git</li>
+        <li>VS Code</li>
       </ul>
     </aside>
 
@@ -481,14 +600,13 @@
             <div class="project-carousel-wrapper">
               <button class="carousel-btn left" aria-label="Previous">&#10094;</button>
               <div class="project-carousel">
-                <img src="ttw_preview.png" alt="Tricycle Transit Watch Preview 1" loading="lazy">
-                <img src="ttwcomplaint_preview.png" alt="Tricycle Transit Watch Preview 2" loading="lazy">
-                <img src="ttwtrack_preview.png" alt="Tricycle Transit Watch Preview 3" loading="lazy">
-                <img src="ttwphonever_preview.png" alt="Tricycle Transit Watch Preview 4" loading="lazy">
+                <img src="homepag.jpg" alt="Barangay Reserve Preview 1" loading="lazy">
+                <img src="reslogin--pag.jpg" alt="Barangay Reserve Preview 2" loading="lazy">
+                <img src="res--home--pag.jpg" alt="Barangay Reserve Preview 3" loading="lazy">
               </div>
               <button class="carousel-btn right" aria-label="Next">&#10095;</button>
             </div>
-            <p>Tricycle Transit Watch</p>
+            <p>Barangay Reserve</p>
             <p><i>still ongoing</i></p>
           </div>
         </div>
@@ -498,108 +616,108 @@
       <section class="section__projects" id="practice-projects">
         <h2>Responsive Web Design Projects</h2>
         <div class="projects__div">
-          <a href="1accessbilityquizlpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1accessbilityquizlpz.html" class="project-tile">
             <img src="accessibilityquiz_preview.png" alt="Accessibility Quiz Preview" loading="lazy">
             <p>Accessibility Quiz</p>
           </a>
 
-          <a href="1balncsheetlpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1balncsheetlpz.html" class="project-tile">
             <img src="balancesheet_preview.png" alt="Balance Sheet Preview" loading="lazy">
             <p>Balance Sheet</p>
           </a>
 
-          <a href="1campercafelpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1campercafelpz.html" class="project-tile">
             <img src="cafemenu_preview.png" alt="Camper Cafe Preview" loading="lazy">
             <p>Camper Cafe</p>
           </a>
 
-          <a href="1catpaintinglpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1catpaintinglpz.html" class="project-tile">
             <img src="catpainting_preview.png" alt="Cat Painting Preview" loading="lazy">
             <p>Cat Painting</p>
           </a>
 
-          <a href="1catphotoapplpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1catphotoapplpz.html" class="project-tile">
             <img src="catphotoapp_preview.png" alt="Cat Photo App Preview" loading="lazy">
             <p>Cat Photo App</p>
           </a>
 
-          <a href="1cityskylinelpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1cityskylinelpz.html" class="project-tile">
             <img src="nightcityskyline_preview.png" alt="City Skyline Preview" loading="lazy">
             <p>City Skyline</p>
           </a>
 
-          <a href="1coloredmarkerslpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1coloredmarkerslpz.html" class="project-tile">
             <img src="colomarker_preview.png" alt="Colored Markers Preview" loading="lazy">
             <p>Colored Markers</p>
           </a>
 
-          <a href="1Edunews_lpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1Edunews_lpz.html" class="project-tile">
             <img src="edunews_preview.png" alt="Edunews Preview" loading="lazy">
             <p>Edunews</p>
           </a>
 
-          <a href="1ferriswheellpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1ferriswheellpz.html" class="project-tile">
             <img src="ferrisrgbwheel_preview.png" alt="Ferris Wheel Preview" loading="lazy">
             <p>Ferris Wheel</p>
           </a>
 
-          <a href="1magazine.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1magazine.html" class="project-tile">
             <img src="magazine_preview.png" alt="Magazine Preview" loading="lazy">
             <p>Magazine</p>
           </a>
 
-          <a href="1nutrionallabllpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1nutrionallabllpz.html" class="project-tile">
             <img src="nutrionallabel_preview.png" alt="Nutritional Label Preview" loading="lazy">
             <p>Nutritional Label</p>
           </a>
 
-          <a href="1pengulpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1pengulpz.html" class="project-tile">
             <img src="penguin_preview.png" alt="Penguin Preview" loading="lazy">
             <p>Penguin</p>
           </a>
 
-          <a href="1photogallerylpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1photogallerylpz.html" class="project-tile">
             <img src="photogallery.png" alt="Photo Gallery Preview" loading="lazy">
             <p>Photo Gallery</p>
           </a>
 
-          <a href="1pianolpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1pianolpz.html" class="project-tile">
             <img src="piano_preview.png" alt="Piano Preview" loading="lazy">
             <p>Piano</p>
           </a>
 
-          <a href="1Productlanding_lpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1Productlanding_lpz.html" class="project-tile">
             <img src="productlandginpage_preview.png" alt="Product Landing Page Preview" loading="lazy">
             <p>Product Landing Page</p>
           </a>
 
-          <a href="1registrationformlpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1registrationformlpz.html" class="project-tile">
             <img src="registrationform_preview.png" alt="Registration Form Preview" loading="lazy">
             <p>Registration Form</p>
           </a>
 
-          <a href="1rothkopaintlpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1rothkopaintlpz.html" class="project-tile">
             <img src="rothkopainting_preview.png" alt="Rothko Paint Preview" loading="lazy">
             <p>Rothko Paint</p>
           </a>
 
-          <a href="1surveylpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1surveylpz.html" class="project-tile">
             <img src="surveryform_preview.png" alt="Survey Preview" loading="lazy">
             <p>Survey</p>
           </a>
 
-          <a href="1techdolpz.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1techdolpz.html" class="project-tile">
             <img src="technicaldocument_preview.png" alt="Technical Document Preview" loading="lazy">
             <p>Technical Document</p>
           </a>
 
-          <a href="1tributepage.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="1tributepage.html" class="project-tile">
             <img src="tributepage.png" alt="Tribute Page Preview" loading="lazy">
             <p>Tribute Page</p>
           </a>
 
           <!-- Example placeholders -->
-          <a href="example.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="example.html" class="project-tile">
             <img src="example_preview.png" alt="Future Projectsa Preview" loading="lazy">
             <p>Future Projects</p>
           </a>
@@ -622,57 +740,57 @@
             <p>GradeBook App</p>
           </a>
 
-          <a href="rpg.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="rpg.html" class="project-tile">
             <img src="2rpg_preview.png" alt="Role Play Game Preview" loading="lazy">
             <p>Role Play Game</p>
           </a>
 
-          <a href="randombgcolor.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="randombgcolor.html" class="project-tile">
             <img src="2randombgc_preview.png" alt="Random Background Color Preview" loading="lazy">
             <p>Random Background Color</p>
           </a>
 
-          <a href="caloriecounter.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="caloriecounter.html" class="project-tile">
             <img src="2caloriecounter_preview.png" alt="Calorie Counter Preview" loading="lazy">
             <p>Calorie Counter</p>
           </a>
 
-          <a href="rockpaperscissor.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="rockpaperscissor.html" class="project-tile">
             <img src="2rockpapersci_preview.png" alt="Rock Paper Scissor Preview" loading="lazy">
             <p>Rock Paper Scissor</p>
           </a>
 
-          <a href="musicplayer.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="musicplayer.html" class="project-tile">
             <img src="2musicplayer_preview.png" alt="Music Player Preview" loading="lazy">
             <p>Music Player</p>
           </a>
 
-          <a href="dateformatter.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="dateformatter.html" class="project-tile">
             <img src="2dataformatter_preview.png" alt="Date Formatter Preview" loading="lazy">
             <p>Date Formatter</p>
           </a>
 
-          <a href="fotblltemcrds.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="fotblltemcrds.html" class="project-tile">
             <img src="2fotblltemcard_preview.png" alt="Football Team Cards Preview" loading="lazy">
             <p>Football Team Cards</p>
           </a>
 
-          <a href="todoapp.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="todoapp.html" class="project-tile">
             <img src="2todoapp_preview.png" alt="To do App Preview" loading="lazy">
             <p>To do App</p>
           </a>
 
-          <a href="binarycnverter.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="binarycnverter.html" class="project-tile">
             <img src="2binarycnvrtr_preview.png" alt="Binary Converter Preview" loading="lazy">
             <p>Binary Converter</p>
           </a>
 
-          <a href="romannumconverter.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="romannumconverter.html" class="project-tile">
             <img src="2romannumcnvrtr_preview.png" alt="Roman Num Converter Preview" loading="lazy">
             <p>Roman Numeral Converter</p>
           </a>
 
-          <a href="example.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="example.html" class="project-tile">
             <img src="example_preview.png" alt="Future Projects Preview" loading="lazy">
             <p>Future Projects</p>
           </a>
@@ -683,15 +801,15 @@
       <section class="section__projects">
         <h2>Random test project</h2>
         <div class="projects__div">
-          <a href="function-heart.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="function-heart.html" class="project-tile">
             <img src="harthart_thumbnail.png" alt="Function Heart Preview" loading="lazy">
             <p>Function Heart</p>
           </a>
-          <a href="point_of_sale_practise_lopez.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="point_of_sale_practise_lopez.html" class="project-tile">
             <img src="point_of_sale_practise_lopez_photocheck.png" alt="POS Preview" loading="lazy">
             <p>Point of Sale Simulation</p>
           </a>
-          <a href="barangay_info_and_feed_lopez.html" target="_blank" class="project-tile" rel="noopener">
+          <a href="barangay_info_and_feed_lopez.html" class="project-tile">
             <img src="barangay_iaf_lopez_preview.png" alt="Barangay Info & Feedback Preview" loading="lazy">
             <p>Barangay Information & Feedback Simulation</p>
           </a>
@@ -704,19 +822,34 @@
   <footer class="footer" role="contentinfo">
     <section class="section__contact" id="contact">
       <h2 class="contact__h2">Let’s Connect</h2>
-      <p class="contact__p">Coffee? ☕</p>
       <div class="contact__links">
         <a href="https://www.facebook.com/AspectOfTargon" target="_blank" rel="noopener">Facebook</a>
         <a href="https://github.com/yelo29" target="_blank" rel="noopener">Github</a>
-        <a href="myemail_and_number_zpl.html" target="_blank" rel="noopener">Contact Card</a>
+        <a href="myemail_and_number_zpl.html">Contact Card</a>
       </div>
     </section>
-    <p>💻 Built with ❤️ by John Leo L. Lopez</p>
-    <p>&copy; 2025 John <a href="https://github.com/yelo29/port" target="_blank" rel="noopener">GitHub Repo</a></p>
+    
+    <p>&copy; 2025 John Leo L. Lopez | Built with HTML, CSS & JavaScript</p>
   </footer>
 
   <!-- SCRIPT -->
   <script>
+    // Mobile navigation toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+    
+    // Close menu when clicking on a link
+    document.querySelectorAll('.nav__bar a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+    
+    // Carousel functionality
     document.querySelectorAll(".project-carousel-wrapper").forEach(wrapper => {
       const carousel = wrapper.querySelector(".project-carousel");
       const images = carousel.querySelectorAll("img");
