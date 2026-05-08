@@ -18,8 +18,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       text-align: center;
+      padding: 20px;
     }
 
     .container {
@@ -29,6 +30,7 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
       max-width: 400px;
       width: 100%;
+      backdrop-filter: blur(10px);
     }
 
     h1 {
@@ -36,9 +38,16 @@
       margin-bottom: 0.5rem;
     }
 
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+
     p {
       font-style: italic;
       margin-bottom: 1.5rem;
+      line-height: 1.5;
     }
 
     button {
@@ -51,6 +60,8 @@
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
+      min-height: 44px;
+      touch-action: manipulation;
     }
 
     button:hover {
@@ -96,23 +107,33 @@
     }
 
     .copy-btn {
-      background: transparent;
-      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       cursor: pointer;
       color: white;
-      font-size: 1.2rem;
-      transition: color 0.3s ease;
+      font-size: 0.9rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      min-height: 32px;
+      touch-action: manipulation;
     }
 
     .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
       color: rgb(255, 200, 100);
+    }
+
+    .copy-btn:active {
+      transform: scale(0.95);
     }
 
     .copied {
       font-size: 0.8rem;
-      color: lightgreen;
+      color: #90EE90;
       margin-left: 0.5rem;
       display: none;
+      font-weight: normal;
     }
 
     .copied.show {
@@ -132,17 +153,17 @@
       <img src="folio_pfp_zepol5.jpg" alt="Your Photo">
 
       <div class="info-card">
-        📧 Email: leo052904@gmail.com
+        <div>Email: leo052904@gmail.com</div>
         <div>
-          <button class="copy-btn" onclick="copyText('leo052904@gmail.com', this)">📋</button>
+          <button class="copy-btn" onclick="copyText('leo052904@gmail.com', this)">Copy</button>
           <span class="copied">Copied!</span>
         </div>
       </div>
 
       <div class="info-card">
-        📱 Phone: 0965-669-2463
+        <div>Phone: 0965-669-2463</div>
         <div>
-          <button class="copy-btn" onclick="copyText('09656692463', this)">📋</button>
+          <button class="copy-btn" onclick="copyText('09656692463', this)">Copy</button>
           <span class="copied">Copied!</span>
         </div>
       </div>
