@@ -3,56 +3,735 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Barangay Info & Feedback</title>
-  <link rel="stylesheet" href="barangay_iaf_lopez_style.css">
+  <title>Barangay Tatala - Information & Feedback</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.05) 10px,
+        rgba(255,255,255,0.05) 20px
+      );
+      animation: slide 20s linear infinite;
+    }
+
+    @keyframes slide {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header p {
+      font-size: 1.2em;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .info-section {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, #ff6b35, #f7931e);
+    }
+
+    .info-section h2 {
+      color: #1e3c72;
+      margin-bottom: 25px;
+      font-size: 1.8em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-card {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border-left: 4px solid #ff6b35;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .info-card:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .info-card h3 {
+      color: #2a5298;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+
+    .info-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .contact-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .contact-btn {
+      background: #ff6b35;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact-btn:hover {
+      background: #e55a2b;
+      transform: translateY(-2px);
+    }
+
+    .feedback-section {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .feedback-section h2 {
+      color: #1e3c72;
+      margin-bottom: 25px;
+      font-size: 1.8em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .feedback-form {
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #ff6b35;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .char-counter {
+      text-align: right;
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255,107,53,0.3);
+    }
+
+    .submit-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .feedback-list {
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 15px;
+      background: #f8f9fa;
+    }
+
+    .feedback-list h3 {
+      color: #1e3c72;
+      margin-bottom: 15px;
+      position: sticky;
+      top: 0;
+      background: #f8f9fa;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #ff6b35;
+    }
+
+    .feedback-item {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border-left: 4px solid #2a5298;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .feedback-item .timestamp {
+      color: #666;
+      font-size: 0.9em;
+      margin-bottom: 5px;
+    }
+
+    .feedback-item .name {
+      font-weight: bold;
+      color: #1e3c72;
+      margin-bottom: 5px;
+    }
+
+    .feedback-item .message {
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .feedback-item .type-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.8em;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .type-complaint { background: #ffebee; color: #c62828; }
+    .type-suggestion { background: #e8f5e8; color: #2e7d32; }
+    .type-inquiry { background: #e3f2fd; color: #1565c0; }
+    .type-compliment { background: #fff3e0; color: #f57c00; }
+    .type-other { background: #f5f5f5; color: #666; }
+
+    .empty-feedback {
+      text-align: center;
+      color: #999;
+      font-style: italic;
+      padding: 20px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+
+    .filter-tab {
+      background: none;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #666;
+      border-bottom: 2px solid transparent;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .filter-tab.active {
+      color: #ff6b35;
+      border-bottom-color: #ff6b35;
+    }
+
+    .filter-tab:hover {
+      color: #ff6b35;
+    }
+
+    footer {
+      background: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      color: #666;
+    }
+
+    /* Notification Toast */
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      z-index: 1000;
+      animation: slideInRight 0.3s ease;
+      max-width: 300px;
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .toast.success { background: #4caf50; }
+    .toast.error { background: #f44336; }
+    .toast.info { background: #2196f3; }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      
+      header {
+        padding: 20px 15px;
+      }
+      
+      header h1 {
+        font-size: 2em;
+      }
+      
+      header p {
+        font-size: 1em;
+      }
+      
+      .main-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .info-section,
+      .feedback-section {
+        padding: 20px;
+      }
+      
+      .info-section h2,
+      .feedback-section h2 {
+        font-size: 1.5em;
+      }
+      
+      .contact-buttons {
+        flex-direction: column;
+      }
+      
+      .contact-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .filter-tabs {
+        flex-wrap: wrap;
+      }
+      
+      .filter-tab {
+        font-size: 0.9em;
+        padding: 6px 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.8em;
+      }
+      
+      .info-section,
+      .feedback-section {
+        padding: 15px;
+      }
+      
+      .info-card {
+        padding: 15px;
+      }
+      
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        padding: 10px;
+      }
+      
+      .submit-btn {
+        padding: 12px 20px;
+        font-size: 1em;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <header>
+      <h1> Barangay Tatala</h1>
+      <p>Information & Feedback System for Residents</p>
+    </header>
 
-  <!-- HEADER -->
-  <header>
-    <h1>🏘️ Barangay Info & Feedback</h1>
-    <p class="subtitle">Accessible information and feedback for residents</p>
-  </header>
+    <div class="main-content">
+      <!-- INFO SECTION -->
+      <section class="info-section">
+        <h2>ℹ Barangay Information</h2>
+        
+        <div class="info-card">
+          <h3> Barangay Details</h3>
+          <p><strong>Barangay:</strong> Tatala</p>
+          <p><strong>Municipality:</strong> Binangonan, Rizal</p>
+          <p><strong>Province:</strong> Rizal</p>
+        </div>
 
-  <!-- MAIN CONTAINER -->
-  <main class="main-container">
+        <div class="info-card">
+          <h3> Contact Information</h3>
+          <p><strong>Phone:</strong> (02) 123-4567</p>
+          <p><strong>Mobile:</strong> 0912-345-6789</p>
+          <p><strong>Email:</strong> barangay.tatala@rizal.gov.ph</p>
+        </div>
 
-    <!-- INFO SECTION -->
-    <section class="info">
-      <h2>ℹ️ Barangay Information</h2>
-      <p><strong>Barangay:</strong> Tatala</p>
-      <p><strong>Location:</strong> Binangonan, Rizal</p>
-      <p><strong>Contact:</strong> (02) 123-4567</p>
-      <p><strong>Office Hours:</strong> Mon–Fri, 8:00 AM – 5:00 PM</p>
-    </section>
+        <div class="info-card">
+          <h3> Office Hours</h3>
+          <p><strong>Monday - Friday:</strong> 8:00 AM – 5:00 PM</p>
+          <p><strong>Saturday:</strong> 8:00 AM – 12:00 PM</p>
+          <p><strong>Sunday:</strong> Closed</p>
+        </div>
 
-    <!-- FEEDBACK FORM -->
-    <section class="feedback">
-      <h2>💬 Feedback Form</h2>
-      <form id="feedbackForm">
-        <label for="name">Name (optional):</label>
-        <input type="text" id="name" placeholder="Enter your name">
+        <div class="info-card">
+          <h3> Services Available</h3>
+          <p>• Barangay Clearance</p>
+          <p>• Business Permit</p>
+          <p>• Certificate of Residency</p>
+          <p>• Indigency Certificate</p>
+        </div>
 
-        <label for="message">Message:</label>
-        <textarea id="message" placeholder="Write your feedback..." required></textarea>
+        <div class="contact-buttons">
+          <a href="tel:021234567" class="contact-btn">
+             Call Now
+          </a>
+          <a href="mailto:barangay.tatala@rizal.gov.ph" class="contact-btn">
+             Send Email
+          </a>
+          <a href="https://www.facebook.com/BarangayTatala" target="_blank" class="contact-btn">
+             Facebook
+          </a>
+        </div>
+      </section>
 
-        <button type="submit">Submit Feedback</button>
-      </form>
+      <!-- FEEDBACK SECTION -->
+      <section class="feedback-section">
+        <h2> Feedback Form</h2>
+        
+        <form class="feedback-form" id="feedbackForm">
+          <div class="form-group">
+            <label for="name">Name (Optional):</label>
+            <input type="text" id="name" placeholder="Enter your name">
+          </div>
 
-      <!-- Feedback List -->
-      <div class="feedback-list">
-        <h3>📋 Previous Feedback</h3>
-        <ul id="feedbackEntries"></ul>
-      </div>
-    </section>
+          <div class="form-group">
+            <label for="email">Email (Optional):</label>
+            <input type="email" id="email" placeholder="your.email@example.com">
+          </div>
 
-  </main>
+          <div class="form-group">
+            <label for="type">Feedback Type:</label>
+            <select id="type" required>
+              <option value="">Select feedback type</option>
+              <option value="complaint">Complaint</option>
+              <option value="suggestion">Suggestion</option>
+              <option value="inquiry">Inquiry</option>
+              <option value="compliment">Compliment</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2025 Barangay Tatala | Created by I.T. Student</p>
-  </footer>
+          <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea id="message" placeholder="Write your feedback here..." maxlength="500" required></textarea>
+            <div class="char-counter">
+              <span id="charCount">0</span> / 500 characters
+            </div>
+          </div>
 
-  <script src="barangay_iaf_lopez_script.js"></script>
+          <button type="submit" class="submit-btn" id="submitBtn">
+            Submit Feedback
+          </button>
+        </form>
+
+        <!-- Feedback List -->
+        <div class="feedback-list">
+          <h3> Previous Feedback</h3>
+          
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="complaint">Complaints</button>
+            <button class="filter-tab" data-filter="suggestion">Suggestions</button>
+            <button class="filter-tab" data-filter="inquiry">Inquiries</button>
+            <button class="filter-tab" data-filter="compliment">Compliments</button>
+          </div>
+          
+          <div id="feedbackEntries">
+            <div class="empty-feedback">No feedback yet. Be the first to share your thoughts!</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Barangay Tatala, Binangonan, Rizal</p>
+    </footer>
+  </div>
+
+  <script>
+    let feedbackData = [];
+    let currentFilter = 'all';
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      loadFeedback();
+      setupEventListeners();
+    });
+
+    function setupEventListeners() {
+      // Form submission
+      document.getElementById('feedbackForm').addEventListener('submit', handleSubmit);
+      
+      // Character counter
+      const messageTextarea = document.getElementById('message');
+      const charCount = document.getElementById('charCount');
+      
+      messageTextarea.addEventListener('input', function() {
+        charCount.textContent = this.value.length;
+      });
+      
+      // Filter tabs
+      document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          currentFilter = this.dataset.filter;
+          displayFeedback();
+        });
+      });
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const type = document.getElementById('type').value;
+      const message = document.getElementById('message').value.trim();
+      
+      if (!type || !message) {
+        showToast('Please fill in all required fields', 'error');
+        return;
+      }
+      
+      const feedback = {
+        id: Date.now(),
+        name: name || 'Anonymous',
+        email: email,
+        type: type,
+        message: message,
+        timestamp: new Date().toLocaleString()
+      };
+      
+      feedbackData.unshift(feedback);
+      saveFeedback();
+      displayFeedback();
+      
+      // Reset form
+      document.getElementById('feedbackForm').reset();
+      document.getElementById('charCount').textContent = '0';
+      
+      showToast('Feedback submitted successfully!', 'success');
+    }
+
+    function displayFeedback() {
+      const container = document.getElementById('feedbackEntries');
+      const filteredFeedback = currentFilter === 'all' 
+        ? feedbackData 
+        : feedbackData.filter(f => f.type === currentFilter);
+      
+      if (filteredFeedback.length === 0) {
+        container.innerHTML = '<div class="empty-feedback">No feedback in this category yet.</div>';
+        return;
+      }
+      
+      container.innerHTML = filteredFeedback.map(feedback => `
+        <div class="feedback-item">
+          <div class="timestamp">${feedback.timestamp}</div>
+          <div class="type-badge type-${feedback.type}">${feedback.type.charAt(0).toUpperCase() + feedback.type.slice(1)}</div>
+          <div class="name">${feedback.name}</div>
+          <div class="message">${feedback.message}</div>
+        </div>
+      `).join('');
+    }
+
+    function saveFeedback() {
+      try {
+        localStorage.setItem('barangayFeedback', JSON.stringify(feedbackData));
+      } catch (e) {
+        console.error('Error saving feedback:', e);
+      }
+    }
+
+    function loadFeedback() {
+      try {
+        const saved = localStorage.getItem('barangayFeedback');
+        if (saved) {
+          feedbackData = JSON.parse(saved);
+          displayFeedback();
+        }
+      } catch (e) {
+        console.error('Error loading feedback:', e);
+      }
+    }
+
+    function showToast(message, type = 'info') {
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.textContent = message;
+      
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.animation = 'slideInRight 0.3s ease reverse';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // Add some sample data for demonstration
+    if (feedbackData.length === 0) {
+      feedbackData = [
+        {
+          id: 1,
+          name: 'Juan Santos',
+          type: 'suggestion',
+          message: 'Suggest adding more street lights in the main road for safety.',
+          timestamp: new Date(Date.now() - 86400000).toLocaleString()
+        },
+        {
+          id: 2,
+          name: 'Maria Reyes',
+          type: 'compliment',
+          message: 'Thank you for the quick response to our flooding concern!',
+          timestamp: new Date(Date.now() - 172800000).toLocaleString()
+        },
+        {
+          id: 3,
+          name: 'Anonymous',
+          type: 'inquiry',
+          message: 'What are the requirements for barangay clearance?',
+          timestamp: new Date(Date.now() - 259200000).toLocaleString()
+        }
+      ];
+      displayFeedback();
+    }
+  </script>
 </body>
 </html>

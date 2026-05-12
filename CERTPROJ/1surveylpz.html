@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Survey 2024</title>
+    <link rel="stylesheet" href="1surveylpz.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 id="title">Tech Industry Survey 2024</h1>
+            <p id="description">Help us understand the current trends in technology and development. Your insights matter to shape the future of tech!</p>
+        </header>
+
+        <form id="survey-form">
+            <!-- Personal Information Section -->
+            <fieldset class="form-section">
+                <legend>Personal Information</legend>
+                
+                <div class="form-group">
+                    <label id="name-label" for="name">Full Name *</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        placeholder="Enter your full name" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label id="email-label" for="email">Email Address *</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Enter your email address" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label id="number-label" for="number">Years of Experience</label>
+                    <input 
+                        type="number" 
+                        id="number" 
+                        name="experience" 
+                        placeholder="0-50" 
+                        min="0" 
+                        max="50"
+                    >
+                </div>
+            </fieldset>
+
+            <!-- Professional Information Section -->
+            <fieldset class="form-section">
+                <legend>Professional Background</legend>
+                
+                <div class="form-group">
+                    <label for="dropdown">Current Role</label>
+                    <select id="dropdown" name="role">
+                        <option value="" disabled selected>Select your current role</option>
+                        <option value="frontend">Frontend Developer</option>
+                        <option value="backend">Backend Developer</option>
+                        <option value="fullstack">Full Stack Developer</option>
+                        <option value="mobile">Mobile Developer</option>
+                        <option value="devops">DevOps Engineer</option>
+                        <option value="data">Data Scientist</option>
+                        <option value="ui-ux">UI/UX Designer</option>
+                        <option value="product">Product Manager</option>
+                        <option value="qa">QA Engineer</option>
+                        <option value="student">Student</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Work Environment Preference</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="remote" name="work-preference" value="remote">
+                            <label for="remote">Remote Work</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="hybrid" name="work-preference" value="hybrid">
+                            <label for="hybrid">Hybrid</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="office" name="work-preference" value="office">
+                            <label for="office">In-Office</label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Technical Skills Section -->
+            <fieldset class="form-section">
+                <legend>Technical Skills</legend>
+                
+                <div class="form-group">
+                    <label class="form-label">Programming Languages/Technologies (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="javascript" name="skills" value="javascript">
+                            <label for="javascript">JavaScript</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="python" name="skills" value="python">
+                            <label for="python">Python</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="react" name="skills" value="react">
+                            <label for="react">React</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="nodejs" name="skills" value="nodejs">
+                            <label for="nodejs">Node.js</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="typescript" name="skills" value="typescript">
+                            <label for="typescript">TypeScript</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="vue" name="skills" value="vue">
+                            <label for="vue">Vue.js</label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Additional Comments Section -->
+            <fieldset class="form-section">
+                <legend>Additional Information</legend>
+                
+                <div class="form-group">
+                    <label for="comments">Any additional comments or suggestions?</label>
+                    <textarea 
+                        id="comments" 
+                        name="comments" 
+                        placeholder="Share your thoughts about the current state of technology, future trends, or anything else you'd like to mention..."
+                        rows="5"
+                    ></textarea>
+                </div>
+            </fieldset>
+
+            <!-- Submit Button -->
+            <div class="submit-container">
+                <button type="submit" id="submit">Submit Survey</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

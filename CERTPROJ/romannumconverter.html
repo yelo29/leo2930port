@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roman Numeral Converter</title>
+    <link rel="stylesheet" href="romannumconverter.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Roman Numeral Converter</h1>
+        <p class="subtitle">Convert Arabic numbers (1-3999) to Roman numerals</p>
+        
+        <div class="input-group">
+            <label for="number">Enter a number:</label>
+            <input type="number" id="number" placeholder="Enter a number between 1 and 3999">
+        </div>
+        
+        <button id="convert-btn">Convert to Roman</button>
+        
+        <div id="output">Enter a number and click convert</div>
+
+        <div class="reference">
+            <h3>Roman Numeral Reference</h3>
+            <div class="reference-grid">
+                <div class="reference-item">
+                    <span class="roman">I</span>
+                    <span>1</span>
+                </div>
+                <div class="reference-item">
+                    <span class="roman">V</span>
+                    <span>5</span>
+                </div>
+                <div class="reference-item">
+                    <span class="roman">X</span>
+                    <span>10</span>
+                </div>
+                <div class="reference-item">
+                    <span class="roman">L</span>
+                    <span>50</span>
+                </div>
+                <div class="reference-item">
+                    <span class="roman">C</span>
+                    <span>100</span>
+                </div>
+                <div class="reference-item">
+                    <span class="roman">D</span>
+                    <span>500</span>
+                </div>
+                <div class="reference-item">
+                    <span class="roman">M</span>
+                    <span>1000</span>
+                </div>
+                <div class="reference-item">
+                    <span class="roman">MMMCMXCIX</span>
+                    <span>3999</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="romannumconverter.js"></script>
+</body>
+</html>
