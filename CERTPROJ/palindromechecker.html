@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome Checker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .input-container {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        #text-input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        #text-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        #text-input:focus {
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #check-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(238, 90, 36, 0.4);
+        }
+
+        #check-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(238, 90, 36, 0.6);
+            background: linear-gradient(135deg, #ff5252, #d63031);
+        }
+
+        #check-btn:active {
+            transform: translateY(-1px);
+        }
+
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        #result.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #result.palindrome {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            border: 2px solid rgba(46, 204, 113, 0.5);
+        }
+
+        #result.not-palindrome {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 2px solid rgba(231, 76, 60, 0.5);
+        }
+
+        .examples {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .examples h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .examples ul {
+            list-style: none;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .examples li {
+            padding: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .examples li:before {
+            content: "✓ ";
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            #text-input, #check-btn {
+                font-size: 1rem;
+            }
+
+            #result {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Palindrome Checker</h1>
+        <p class="subtitle">Enter a word or phrase to check if it reads the same forwards and backwards!</p>
+        
+        <div class="input-container">
+            <input type="text" id="text-input" placeholder="Enter text to check..." />
+        </div>
+        
+        <button id="check-btn">Check Palindrome</button>
+        
+        <div id="result"></div>
+        
+        <div class="examples">
+            <h3>Examples of palindromes:</h3>
+            <ul>
+                <li>racecar</li>
+                <li>A man, a plan, a canal: Panama</li>
+                <li>race car</li>
+                <li>never odd or even</li>
+                <li>Madam</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('text-input');
+        const checkBtn = document.getElementById('check-btn');
+        const result = document.getElementById('result');
+
+        function isPalindrome(str) {
+            // Remove all non-alphanumeric characters and convert to lowercase
+            const cleanedStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+            
+            // Check if the cleaned string is the same forwards and backwards
+            return cleanedStr === cleanedStr.split('').reverse().join('');
+        }
+
+        function checkPalindrome() {
+            const inputValue = textInput.value.trim();
+            
+            // Check if input is empty
+            if (!inputValue) {
+                alert('Please input a value');
+                return;
+            }
+
+            // Check if it's a palindrome
+            const isInputPalindrome = isPalindrome(inputValue);
+            
+            // Display result
+            if (isInputPalindrome) {
+                result.textContent = `${inputValue} is a palindrome`;
+                result.className = 'palindrome show';
+            } else {
+                result.textContent = `${inputValue} is not a palindrome`;
+                result.className = 'not-palindrome show';
+            }
+        }
+
+        // Event listeners
+        checkBtn.addEventListener('click', checkPalindrome);
+
+        textInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPalindrome();
+            }
+        });
+
+        // Clear result when input changes
+        textInput.addEventListener('input', function() {
+            result.className = '';
+            result.textContent = '';
+        });
+    </script>
+</body>
+</html>
